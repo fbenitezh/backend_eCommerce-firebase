@@ -1,0 +1,28 @@
+{
+  "name": "mybackend_ecommerce",
+  "version": "1.0.0",
+  "description": "Api restfull de ecommerce",
+  "main": "./src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development nodemon --inspect ./src/server.js",
+    "start": "NODE_ENV=production node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fbenitezh/backend_eCommerce.git"
+  },
+  "author": "Franco Benitez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fbenitezh/backend_eCommerce/issues"
+  },
+  "homepage": "https://github.com/fbenitezh/backend_eCommerce#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
