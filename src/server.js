@@ -7,8 +7,10 @@ const routerCarrito = require('./routes/carrito');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('',express.static('./public'));
 app.use('/productos',routerProductos);
 app.use('/carrito',routerCarrito);
+
 
 app.listen(PORT,()=>{
     console.log(`Server on port ${PORT}`);

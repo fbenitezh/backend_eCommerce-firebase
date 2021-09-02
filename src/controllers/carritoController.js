@@ -1,10 +1,11 @@
 const CarritoModel = require("../models/Carrito");
 const Controller = require("./Controller");
+const path = require('path');
 
 class CarritoController extends Controller {
   constructor(props) {
     super(props);
-    this.model = new CarritoModel("carrito");
+    this.model = new CarritoModel(path.resolve(__dirname+`../../../public/carrito.json`));
   }
 
   async create(req, res) {
