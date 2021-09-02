@@ -1,25 +1,17 @@
-const {Router} = require('express');
+const { Router } = require("express");
+const CarritoController = require("../controllers/carritoController");
 
 const router = new Router();
+const carritoController = new CarritoController();
 
-router.post('/',(req,res)=>{
-    res.send('ok carrito');
-})
+router.post("/", carritoController.create);
 
-router.delete('/:id',(req,res)=>{
-    res.send('ok carrito');
-});
+router.delete("/:id", carritoController.delete);
 
-router.get('/:id/productos',(req,res)=>{
-    res.send('ok carrito');
-});
+router.get("/:id/productos", carritoController.getProducts);
 
-router.post('/:id/productos',(req,res)=>{
-    res.send('ok carrito');
-})
+router.post("/:id/productos", carritoController.addProductById);
 
-router.delete('/:id/productos/:id_prod',(req,res)=>{
-    res.send('ok carrito');
-})
+router.delete("/:id/productos/:id_prod", carritoController.deleteByIdProducto);
 
 module.exports = router;
