@@ -2,7 +2,7 @@ const CarritoModel = require("../models/Carrito");
 const Controller = require("./Controller");
 const path = require("path");
 const carritoModel = new CarritoModel(
-  path.resolve(__dirname + `../../../public/carrito.json`)
+  path.resolve("./src/storage/carrito.json")
 );
 
 class CarritoController extends Controller {

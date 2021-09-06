@@ -1,6 +1,7 @@
 const ProductoModel = require("../models/Producto");
 const Controller = require("./Controller");
-const productoModel = new ProductoModel("./public/productos.json");
+const path = require("path");
+const productoModel = new ProductoModel(path.resolve("./src/storage/productos.json"));
 
 class ProductoController extends Controller {
   constructor() {
