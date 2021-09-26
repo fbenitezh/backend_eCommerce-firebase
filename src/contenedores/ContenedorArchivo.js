@@ -1,9 +1,10 @@
 import fs from "fs";
+import {config} from '../config/index.js';
 
 class ContenedorArchivo {
   constructor(schema) {
     //console.log(schema);
-    this.schema = schema;
+    this.schema = config.db.file.basePath + schema;
   }
 
   async listResource() {

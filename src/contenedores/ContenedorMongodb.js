@@ -1,16 +1,14 @@
-const fs = require("fs");
+import mongoose from 'mongoose';
 
 class ContenedorMongo {
-  constructor(schema) {
-    //console.log(schema);
-    this.schema = schema;
+  constructor(schema,collection) {
+    this.schema = mongoose.model(collection, schema);
   }
 
   async listResource() {
     try {
-      let content = await fs.promises.readFile(this.schema, "utf-8");
-      if (content == "") return [];
-      return JSON.parse(content);
+      const data = await this.schema.find();
+      return data;
     } catch (error) {
       throw new Error(error);
     }
@@ -18,15 +16,8 @@ class ContenedorMongo {
 
   async addResource(data) {
     try {
-      let contenido = await fs.promises.readFile(this.schema, "utf-8");
-      data.id = 1;
-      if (contenido != "") {
-        contenido = JSON.parse(contenido);
-        data.id = contenido[contenido.length - 1].id + 1;
-      }
-      let array = [...contenido, data];
-      await fs.promises.writeFile(this.schema, JSON.stringify(array, null, 2));
-      return data.id;
+      const response = await this.schema.insertMany([data]);
+      return response;
     } catch (error) {
       throw new Error(error);
     }
@@ -34,26 +25,10 @@ class ContenedorMongo {
 
   async updateResource(data, id) {
     try {
-      let contenido = await fs.promises.readFile(this.schema, "utf-8");
-      contenido = JSON.parse(contenido);
-      let index = null;
-      let producto = null;
-      contenido.map((prd, key) => {
-        if (prd.id == id) {
-          producto = prd;
-          index = key;
-          return;
-        }
+      const response = await this.schema.updateOne({_id:mongoose.Types.ObjectId(id)},{
+        $set:{data}
       });
-
-      producto = data;
-
-      contenido[index] = producto;
-      await fs.promises.writeFile(
-        this.schema,
-        JSON.stringify(contenido, null, 2)
-      );
-      return;
+      return response;
     } catch (error) {
       throw new Error(error);
     }
@@ -61,16 +36,8 @@ class ContenedorMongo {
 
   async deleteResource(id) {
     try {
-      let contentFile = await fs.promises.readFile(this.schema, "utf-8");
-      if (contentFile == "") return "Nada para eliminar";
-      contentFile = JSON.parse(contentFile);
-      let nuevoContenido = contentFile.filter((item) => item.id != id);
-      nuevoContenido =
-        nuevoContenido.length == 0
-          ? ""
-          : JSON.stringify(nuevoContenido, null, 2);
-      await fs.promises.writeFile(this.schema, nuevoContenido);
-      return "Producto eliminado";
+      const response = await this.schema.deleteOne({_id:mongoose.Types.ObjectId(id)});
+      return response;
     } catch (error) {
       throw new Error(error);
     }
