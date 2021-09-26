@@ -1,6 +1,6 @@
-const CarritoModel = require("../models/Carrito");
-const Controller = require("./Controller");
-const path = require("path");
+import CarritoModel from "../models/Carrito.js";
+import Controller from "./Controller.js";
+import path from "path";
 const carritoModel = new CarritoModel(
   path.resolve("./src/storage/carrito.json")
 );
@@ -102,4 +102,4 @@ class CarritoController extends Controller {
   }
 }
 
-module.exports = CarritoController;
+export default CarritoController;

@@ -1,4 +1,4 @@
-const Model = require("./Model");
+import Model from "./Model.js";
 
 class ProductoModel extends Model {
   constructor(schema) {
@@ -136,4 +136,4 @@ class ProductoModel extends Model {
   }
 }
 
-module.exports = ProductoModel;
+export default ProductoModel;

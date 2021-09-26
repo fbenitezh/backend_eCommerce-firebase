@@ -1,4 +1,4 @@
-const Model = require("./Model");
+import Model from "./Model.js";
 
 class CarritoModel extends Model {
   constructor(schema) {
@@ -109,4 +109,4 @@ class CarritoModel extends Model {
   }
 }
 
-module.exports = CarritoModel;
+export default CarritoModel;

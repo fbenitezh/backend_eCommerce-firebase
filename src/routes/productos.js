@@ -1,6 +1,6 @@
-const { Router } = require("express");
-const ProductoController = require("../controllers/productoController");
-const { requiereAdmin } = require("../middlewares/admin");
+import { Router } from "express";
+import ProductoController from "../controllers/productoController.js";
+import { requiereAdmin } from "../middlewares/admin.js";
 
 const router = new Router();
 const productoController = new ProductoController();
@@ -13,4 +13,4 @@ router.put("/:id", requiereAdmin, productoController.updateProduct);
 
 router.delete("/:id", requiereAdmin, productoController.deleteProduct);
 
-module.exports = router;
+export default router;

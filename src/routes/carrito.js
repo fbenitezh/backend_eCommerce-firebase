@@ -1,5 +1,5 @@
-const { Router } = require("express");
-const CarritoController = require("../controllers/carritoController");
+import { Router } from "express";
+import CarritoController from "../controllers/carritoController.js";
 
 const router = new Router();
 const carritoController = new CarritoController();
@@ -15,4 +15,4 @@ router.delete("/:id", carritoController.delete);
 router.get("/:id/productos", carritoController.getProducts);
 
 
-module.exports = router;
+export default router;

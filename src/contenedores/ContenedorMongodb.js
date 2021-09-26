@@ -1,6 +1,6 @@
-import fs from "fs";
+const fs = require("fs");
 
-class Model {
+class ContenedorMongo {
   constructor(schema) {
     //console.log(schema);
     this.schema = schema;
@@ -81,4 +81,4 @@ class Model {
   }
 }
 
-export default Model;
+export default ContenedorMongo;

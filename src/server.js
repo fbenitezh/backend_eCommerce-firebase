@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
+import routerProductos from "./routes/productos.js";
+import routerCarrito from "./routes/carrito.js";
 const app = express();
 const PORT = process.env.PORT || 8080;
-const routerProductos = require("./routes/productos");
-const routerCarrito = require("./routes/carrito");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

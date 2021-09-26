@@ -1,6 +1,6 @@
 import fs from "fs";
 
-class Model {
+class ContenedorArchivo {
   constructor(schema) {
     //console.log(schema);
     this.schema = schema;
@@ -81,4 +81,4 @@ class Model {
   }
 }
 
-export default Model;
+export default ContenedorArchivo;

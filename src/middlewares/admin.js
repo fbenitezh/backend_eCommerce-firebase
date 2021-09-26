@@ -11,4 +11,4 @@ const requiereAdmin = (req, res, next) => {
 };
 
 
-module.exports = {requiereAdmin}
+export {requiereAdmin}

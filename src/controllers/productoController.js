@@ -1,6 +1,6 @@
-const ProductoModel = require("../models/Producto");
-const Controller = require("./Controller");
-const path = require("path");
+import ProductoModel from "../models/Producto.js";
+import Controller from "./Controller.js";
+import path from "path";
 const productoModel = new ProductoModel(path.resolve("./src/storage/productos.json"));
 
 class ProductoController extends Controller {
@@ -83,4 +83,4 @@ class ProductoController extends Controller {
   }
 }
 
-module.exports = ProductoController;
+export default ProductoController;
