@@ -1,9 +1,8 @@
-import MongoService from './MongoService.js';
-import { productoModel } from '../models/producto.model.js';
+import FirebaseService from './FirebaseService.js';
 
-class ProductoService extends MongoService{
+class ProductoService extends FirebaseService{
   constructor() {
-    super(productoModel,"Productos");
+    super("Productos");
     this.id = null;
     this.nombre = null;
     this.descripcion = null;
@@ -15,12 +14,7 @@ class ProductoService extends MongoService{
 
   async get(id = null) {
     try {
-      let data;
-      if(id){
-        data = await this.listOneResource(id);
-      }else{
-        data = await this.listResource();
-      }
+      let data = await this.listResource(id);
       return data;
     } catch (error) {
       throw new Error(error);
@@ -54,8 +48,8 @@ class ProductoService extends MongoService{
       stock:this.stock
     }
     try {
-      await this.updateResource(data,this.id);
-      return;
+      const item = await this.updateResource(data,this.id);
+      return item;
     } catch (error) {
       throw new Error(error);
     }

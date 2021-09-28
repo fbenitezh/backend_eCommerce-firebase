@@ -33,7 +33,7 @@ class ProductoController extends Controller {
       const response = await productoService.add();
       res.status(200).json({
         ok: true,
-        insertId:response[0]._id,
+        insertId: response,
       });
     } catch (error) {
       res.status(400).json({
@@ -71,8 +71,8 @@ class ProductoController extends Controller {
       const response = await productoService.delete();
       res.status(200).json({
         ok: true,
-        info:response,
-        moreInfo:`Se ha eliminado el producto con el id ${productoService.getId()}`
+        info: response,
+        moreInfo: `Se ha eliminado el producto con el id ${productoService.getId()}`,
       });
     } catch (error) {
       res.status(400).json({

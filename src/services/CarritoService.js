@@ -1,10 +1,8 @@
-import MongoService from "./MongoService.js";
-import { carritoModel } from "../models/carrito.model.js";
-import mongoose from "mongoose";
+import FirebaseService from "./FirebaseService.js";
 
-class CarritoService extends MongoService {
+class CarritoService extends FirebaseService {
   constructor() {
-    super(carritoModel, "Carrito");
+    super("Carrito");
     this.id = null;
     this.productos = [];
   }
@@ -32,11 +30,13 @@ class CarritoService extends MongoService {
 
   async getProductsInCarrito(id) {
     try {
-      const carrito = await this.listOneResource(id);
-      this.setProductos([]);
-      if (carrito && carrito.length == 1) {
-        this.setId(carrito[0]._id);
-        this.setProductos(carrito[0].productos);
+      const carrito = await this.listResource(id);
+      if (carrito && carrito.productos.length > 0) {
+        console.log(carrito);
+        this.setId(carrito.id);
+        this.setProductos(carrito.productos);
+      }else{
+        this.setProductos([]);
       }
       return this.productos;
     } catch (error) {
@@ -48,11 +48,9 @@ class CarritoService extends MongoService {
     try {
       let productos = await this.getProductsInCarrito(this.id);
       productos = [...productos, ...products];
-      await this.schema.updateOne(
-        { _id: mongoose.Types.ObjectId(this.id) },
-        { productos }
-      );
-      return;
+      const doc = this.query.doc(this.id);
+      const item = await doc.update({productos});
+      return item;
     } catch (error) {
       throw new Error(error);
     }
@@ -62,11 +60,9 @@ class CarritoService extends MongoService {
     try {
       let productos = await this.getProductsInCarrito(this.id);
       let productosUpgrade = productos.filter((prd) => prd._id != idProducto);
-      await this.schema.updateOne(
-        { _id: mongoose.Types.ObjectId(this.id) },
-        { productos: productosUpgrade }
-      );
-      return;
+      const doc = this.query.doc(this.id);
+      const item = await doc.update({productos:productosUpgrade});
+      return item;
     } catch (error) {
       throw new Error(error);
     }
