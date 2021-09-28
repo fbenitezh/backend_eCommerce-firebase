@@ -1,4 +1,4 @@
-const admin = false;
+const admin = true;
 
 const requiereAdmin = (req, res, next) => {
   if (!admin) {

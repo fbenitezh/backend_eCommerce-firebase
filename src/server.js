@@ -1,6 +1,7 @@
 import express from "express";
 import routerProductos from "./routes/productos.js";
 import routerCarrito from "./routes/carrito.js";
+import './db/mongo.js';
 const app = express();
 const PORT = process.env.PORT || 8080;
 

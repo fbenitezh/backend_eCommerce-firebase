@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-class ContenedorMongo {
+class MongoService {
   constructor(schema,collection) {
     this.schema = mongoose.model(collection, schema);
   }
@@ -8,6 +8,15 @@ class ContenedorMongo {
   async listResource() {
     try {
       const data = await this.schema.find();
+      return data;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async listOneResource(id) {
+    try {
+      const data = await this.schema.find({_id:mongoose.Types.ObjectId(id)});
       return data;
     } catch (error) {
       throw new Error(error);
@@ -25,9 +34,7 @@ class ContenedorMongo {
 
   async updateResource(data, id) {
     try {
-      const response = await this.schema.updateOne({_id:mongoose.Types.ObjectId(id)},{
-        $set:{data}
-      });
+      const response = await this.schema.updateOne({_id:mongoose.Types.ObjectId(id)},data);
       return response;
     } catch (error) {
       throw new Error(error);
@@ -48,4 +55,4 @@ class ContenedorMongo {
   }
 }
 
-export default ContenedorMongo;
+export default MongoService;

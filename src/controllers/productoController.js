@@ -1,7 +1,6 @@
-import ProductoModel from "../models/Producto.js";
-import Controller from "./Controller.js";
-import path from "path";
-const productoModel = new ProductoModel(path.resolve("./src/storage/productos.json"));
+import ProductoService from "../services/ProductoService.js";
+import Controller from "../services/Controller.js";
+const productoService = new ProductoService();
 
 class ProductoController extends Controller {
   constructor() {
@@ -13,7 +12,7 @@ class ProductoController extends Controller {
       params: { id },
     } = req;
     try {
-      const data = await productoModel.get(id);
+      const data = await productoService.get(id);
       res.status(200).json({
         ok: true,
         data,
@@ -30,11 +29,11 @@ class ProductoController extends Controller {
   async addProduct(req, res) {
     const { body } = req;
     try {
-      productoModel.inicializarProducto(body);
-      const insertId = await productoModel.add();
+      productoService.inicializarProducto(body);
+      const response = await productoService.add();
       res.status(200).json({
         ok: true,
-        insertId,
+        insertId:response[0]._id,
       });
     } catch (error) {
       res.status(400).json({
@@ -50,8 +49,9 @@ class ProductoController extends Controller {
       params: { id },
     } = req;
     try {
-      productoModel.inicializarProducto(body, id);
-      await productoModel.update();
+      productoService.setId(id);
+      productoService.inicializarProducto(body);
+      await productoService.update();
       res.status(200).json({
         ok: true,
         info: "Producto modificado",
@@ -67,12 +67,12 @@ class ProductoController extends Controller {
   async deleteProduct(req, res) {
     const { id } = req.params;
     try {
-      productoModel.setId(id);
-      const response = await productoModel.delete();
+      productoService.setId(id);
+      const response = await productoService.delete();
       res.status(200).json({
         ok: true,
         info:response,
-        moreInfo:`Se ha eliminado el producto con el id ${productoModel.getId()}`
+        moreInfo:`Se ha eliminado el producto con el id ${productoService.getId()}`
       });
     } catch (error) {
       res.status(400).json({

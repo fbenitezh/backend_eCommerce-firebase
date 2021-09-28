@@ -1,10 +1,10 @@
-import Model from "./Model.js";
+import MongoService from './MongoService.js';
+import { productoModel } from '../models/producto.model.js';
 
-class ProductoModel extends Model {
-  constructor(schema) {
-    super(schema);
+class ProductoService extends MongoService{
+  constructor() {
+    super(productoModel,"Productos");
     this.id = null;
-    this.timestamp = null;
     this.nombre = null;
     this.descripcion = null;
     this.codigo = null;
@@ -15,12 +15,13 @@ class ProductoModel extends Model {
 
   async get(id = null) {
     try {
-      const productos = await this.listResource();
-      if (id) {
-        let producto = productos.filter((prd) => prd.id == id);
-        return producto;
+      let data;
+      if(id){
+        data = await this.listOneResource(id);
+      }else{
+        data = await this.listResource();
       }
-      return productos;
+      return data;
     } catch (error) {
       throw new Error(error);
     }
@@ -28,14 +29,12 @@ class ProductoModel extends Model {
 
   async add(){
     const data = {
-      id:this.getId(),
-      timestamp:this.getTimestamp(),
-      nombre:this.getNombre(),
-      descripcion:this.getDescripcion(),
-      codigo:this.getCodigo(),
-      foto:this.getFoto(),
-      precio:this.getPrecio(),
-      stock:this.getStock()
+      nombre:this.nombre,
+      descripcion:this.descripcion,
+      codigo:this.codigo,
+      foto:this.foto,
+      precio:this.precio,
+      stock:this.stock
     }
     try {
       const insertId = await this.addResource(data);
@@ -47,17 +46,15 @@ class ProductoModel extends Model {
 
   async update(){
     const data = {
-      id:this.getId(),
-      timestamp:this.getTimestamp(),
-      nombre:this.getNombre(),
-      descripcion:this.getDescripcion(),
-      codigo:this.getCodigo(),
-      foto:this.getFoto(),
-      precio:this.getPrecio(),
-      stock:this.getStock()
+      nombre:this.nombre,
+      descripcion:this.descripcion,
+      codigo:this.codigo,
+      foto:this.foto,
+      precio:this.precio,
+      stock:this.stock
     }
     try {
-      await this.updateResource(data,this.getId());
+      await this.updateResource(data,this.id);
       return;
     } catch (error) {
       throw new Error(error);
@@ -66,16 +63,14 @@ class ProductoModel extends Model {
 
   async delete(){
     try {
-      const message = await this.deleteResource(this.getId());
+      const message = await this.deleteResource(this.id);
       return message;
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  inicializarProducto(data,id=null){
-    this.setId(id);
-    this.setTimestamp(Date.now());
+  inicializarProducto(data){
     this.setNombre(data.nombre);
     this.setDescripcion(data.descripcion);
     this.setCodigo(data.codigo);
@@ -87,9 +82,6 @@ class ProductoModel extends Model {
   //   GETTERS AND SETTERS
   setId(id) {
     this.id = id;
-  }
-  setTimestamp(time) {
-    this.timestamp = time;
   }
   setNombre(nombre) {
     this.nombre = nombre;
@@ -113,9 +105,6 @@ class ProductoModel extends Model {
   getId() {
     return this.id;
   }
-  getTimestamp() {
-    return this.timestamp;
-  }
   getNombre() {
     return this.nombre;
   }
@@ -134,6 +123,7 @@ class ProductoModel extends Model {
   getStock() {
     return this.stock;
   }
+  
 }
 
-export default ProductoModel;
+export default ProductoService;

@@ -1,9 +1,6 @@
-import CarritoModel from "../models/Carrito.js";
-import Controller from "./Controller.js";
-import path from "path";
-const carritoModel = new CarritoModel(
-  path.resolve("./src/storage/carrito.json")
-);
+import CarritoService from "../services/CarritoService.js";
+import Controller from "../services/Controller.js";
+const carritoService = new CarritoService();
 
 class CarritoController extends Controller {
   constructor() {
@@ -12,9 +9,11 @@ class CarritoController extends Controller {
 
   async create(req, res) {
     try {
-      const { body } = req;
-      carritoModel.inicializarCarrito(body);
-      const insertId = await carritoModel.add();
+      const {
+        body: { productos },
+      } = req;
+      carritoService.setProductos(productos);
+      const insertId = await carritoService.add();
       res.status(200).json({
         ok: true,
         insertId,
@@ -32,11 +31,11 @@ class CarritoController extends Controller {
       const {
         params: { id },
       } = req;
-      carritoModel.setId(id);
-      await carritoModel.delete();
+      carritoService.setId(id);
+      await carritoService.delete();
       res.status(200).json({
         ok: true,
-        info: 'Carrito eliminado',
+        info: "Carrito eliminado",
       });
     } catch (error) {
       res.status(400).json({
@@ -51,7 +50,7 @@ class CarritoController extends Controller {
       const {
         params: { id },
       } = req;
-      const productos = await carritoModel.getProductsInCarrito(id);
+      const productos = await carritoService.getProductsInCarrito(id);
       res.status(200).json({
         ok: true,
         data: productos,
@@ -70,7 +69,8 @@ class CarritoController extends Controller {
         params: { id },
         body: { productos },
       } = req;
-      await carritoModel.addProduct(productos, id);
+      carritoService.setId(id);
+      await carritoService.addProduct(productos);
       res.status(200).json({
         ok: true,
         info: "Producto agregado",
@@ -88,7 +88,8 @@ class CarritoController extends Controller {
       const {
         params: { id, id_prod },
       } = req;
-      await carritoModel.deleteProduct(id, id_prod);
+      carritoService.setId(id);
+      await carritoService.deleteProduct(id_prod);
       res.status(200).json({
         ok: true,
         info: "Producto eliminado",

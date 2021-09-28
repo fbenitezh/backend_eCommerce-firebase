@@ -1,4 +1,9 @@
 {
+  "values": {
+		"key": "url",
+		"value": "http://localhost:8080/api",
+		"enabled": true
+	},
 	"info": {
 		"_postman_id": "65a634dd-b574-43c2-ba5e-bde7a81c1dcd",
 		"name": "proyecto-ecommerce",
@@ -14,13 +19,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/productos/2",
+							"raw": "{{url}}/productos/615331d4a901fa62544ea27b",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"productos",
-								"2"
+								"615331d4a901fa62544ea27b"
 							]
 						}
 					},
@@ -41,13 +46,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/productos/2",
+							"raw": "{{url}}/productos/615331aaf67150b6069c1eff",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"productos",
-								"2"
+								"615331aaf67150b6069c1eff"
 							]
 						}
 					},
@@ -60,7 +65,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\":\"Cuaderno\",\n    \"descripcion\":\"descripcion del producto\",\n    \"codigo\":\"111222\",\n    \"foto\":\"https://cdn3.iconfinder.com/data/icons/education-209/64/book-note-paper-school-256.png\",\n    \"precio\":300,\n    \"stock\":29\n}",
+							"raw": "{\n    \"nombre\":\"Cartuchera\",\n    \"descripcion\":\"descripcion de la cartuchera\",\n    \"codigo\":\"111222\",\n    \"foto\":\"https://cdn3.iconfinder.com/data/icons/education-209/64/book-note-paper-school-256.png\",\n    \"precio\":760,\n    \"stock\":2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,13 +90,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/productos/",
+							"raw": "{{url}}/productos",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"productos",
-								""
+								"productos"
 							]
 						}
 					},
@@ -109,7 +113,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"productos\":[\n        {\n            \"id\": 4,\n            \"timestamp\": 1630768352154,\n            \"nombre\": \"Manzana\",\n            \"descripcion\": \"descripcion del producto\",\n            \"codigo\": \"111222\",\n            \"foto\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/apple-fruit-science-school-256.png\",\n            \"precio\": 56,\n            \"stock\": 20\n        }\n    ]\n}",
+							"raw": "{\n    \"productos\":[\n        {\n            \"_id\": \"61533180f67150b6069c1efc\",\n            \"nombre\": \"Cuaderno\",\n            \"descripcion\": \"descripcion del producto\",\n            \"codigo\": \"111222\",\n            \"foto\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/book-note-paper-school-256.png\",\n            \"precio\": 300,\n            \"stock\": 29,\n            \"__v\": 0\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -136,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"productos\":[\n        {\n            \"id\": 1,\n            \"nombre\": \"Lapiz\",\n            \"descripcion\": \"descripcion del producto\",\n            \"codigo\": \"111222\",\n            \"foto\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/pencil-pen-stationery-school-256.png\",\n            \"precio\": 100,\n            \"stock\": 2\n        }\n    ]\n}",
+							"raw": "{\n    \"productos\":[\n        {\n            \"_id\": \"615331aaf67150b6069c1eff\",\n            \"nombre\": \"Lapiz de madera\",\n            \"descripcion\": \"descripcion del producto\",\n            \"codigo\": \"111222\",\n            \"foto\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/pencil-pen-stationery-school-256.png\",\n            \"precio\": 100,\n            \"stock\": 2,\n            \"__v\": 0\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -144,13 +148,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/carrito/4/productos",
+							"raw": "{{url}}/carrito/6153385d230450c252354d4e/productos",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"carrito",
-								"4",
+								"6153385d230450c252354d4e",
 								"productos"
 							]
 						}
@@ -163,13 +167,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/carrito/4",
+							"raw": "{{url}}/carrito/6153458ab250ecf93ee37f51",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"carrito",
-								"4"
+								"6153458ab250ecf93ee37f51"
 							]
 						}
 					},
@@ -181,15 +185,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/carrito/1/productos/1",
+							"raw": "{{url}}/carrito/6153385d230450c252354d4e/productos/615331aaf67150b6069c1eff",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"carrito",
-								"1",
+								"6153385d230450c252354d4e",
 								"productos",
-								"1"
+								"615331aaf67150b6069c1eff"
 							]
 						}
 					},
@@ -201,13 +205,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/carrito/4/productos",
+							"raw": "{{url}}/carrito/6153458ab250ecf93ee37f51/productos",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"carrito",
-								"4",
+								"6153458ab250ecf93ee37f51",
 								"productos"
 							]
 						}
